@@ -2,19 +2,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser, editUser } from '../Redux/Actions/userActions';
+import { useParams } from 'react-router-dom';
 
 const UserDetail = ({ match }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.users.users.find(u => u.id === match.params.id));
-  const [formData, setFormData] = useState({ name: '', email: '' });
+
+const { id } = useParams();
+const user = useSelector(state => state.users.user);
+ const isLoading = useSelector(state => state.users.loading);
+const [formData, setFormData] = useState({ name: '', email: '' });
 
   useEffect(() => {
     if (!user) {
-      dispatch(fetchUser(match.params.id));
+      dispatch(fetchUser(id));
     } else {
       setFormData({ name: user.name, email: user.email });
     }
-  }, [dispatch, user, match.params.id]);
+  }, [dispatch, user, id]);
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,10 +26,11 @@ const UserDetail = ({ match }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(editUser(match.params.id, formData));
+    dispatch(editUser(id, formData));
   };
 
-  if (!user) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
+  if (!user) return <p>User Not found</p>;
 
   return (
     <form onSubmit={handleSubmit}>

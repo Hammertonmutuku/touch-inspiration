@@ -1,9 +1,8 @@
-import { combineReducers } from 'redux';
-
 const initialState = {
-    data: [{id:1, title:"hamma", category: "progam",}],
+    users: [],
+    user: null,  
     loading:false,
-    console: null,
+    error: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -25,6 +24,40 @@ const userReducer = (state = initialState, action) => {
             loading: false,
             error: action.payload,
           };
+          case 'FETCH_USER_REQUEST':
+            return {
+              ...state,
+              loading: true,
+            };
+          case 'FETCH_USER_SUCCESS':
+            return {
+              ...state,
+              loading: false,
+              user: action.payload,
+            };
+          case 'FETCH_USER_FAILURE':
+            return {
+              ...state,
+              loading: false,
+              error: action.payload,
+            };
+            case 'EDIT_USER_REQUEST':
+            return {
+              ...state,
+              loading: true,
+            };
+          case 'EDIT_USER_SUCCESS':
+            return {
+              ...state,
+              loading: false,
+              user: action.payload,
+            };
+          case 'EDIT_USER_FAILURE':
+            return {
+              ...state,
+              loading: false,
+              error: action.payload,
+            };
         default:
           return state;
       }

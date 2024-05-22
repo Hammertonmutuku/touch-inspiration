@@ -5,7 +5,10 @@ import { fetchUsers } from '../Redux/Actions/userActions';
 
 const UserList = () => {
   const dispatch = useDispatch();
-  const { users, loading, error } = useSelector(state => state.users);
+  const { users, loading, error } = useSelector(state => {
+    console.log(state.users); // Logs the state of users
+    return state.users;
+  });
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -18,7 +21,7 @@ const UserList = () => {
   return (
     <ul>
       {users.map(user => (
-        <li key={user.id}>{user.name}</li>
+        <li key={user._id}>{user.name}</li>
       ))}
     </ul>
   );
