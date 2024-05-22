@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 const initialState = {
-    data: [],
+    data: [{id:1, title:"hamma", category: "progam",}],
     loading:false,
     console: null,
 };

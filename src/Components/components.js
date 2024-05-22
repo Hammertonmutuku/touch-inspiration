@@ -12,6 +12,7 @@ const UserList = () => {
   }, [dispatch]);
 
   if (loading) return <p>Loading...</p>;
+  if(!users ) return <p>No users</p>
   if (error) return <p>Error: {error}</p>;
 
   return (

@@ -2,18 +2,23 @@ import './App.css';
 import React from 'react';
 import UserList from './Components/components';
 import UserDetail from './Components/userDetails';
-import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <Router>
     <div className="App">
-    <Routes>
-          <Route path="/" exact component={UserList} />
-          <Route path="/user/:id" component={UserDetail} />
+
+       <Router>
+        <Routes>
+        <Route path="/" element={<UserList/>} />
+        <Route path="/user/:id" element={<UserDetail />} />
         </Routes>
+         
+
+        </Router>
+    
     </div>
-    </Router>
+    
   );
 }
 

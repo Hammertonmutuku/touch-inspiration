@@ -1,19 +1,26 @@
-// export const fetchDataRequest = () => ({
-//     type: 'FETCH_DATA_REQUEST',
-// });
-
-// export const fetchDataSuccess = (data) => ({
-//     type: 'FETCH_DATA_SUCCESS',
-//     payload: data
-// });
-
-// export const fetchDataFailure = (error) => ({
-//   type : 'FETCH_DATA_FAILURE',
-//  error 
-// });
-
-// src/actions/userActions.js
 import axios from 'axios';
+import { ActionTypes} from '../Containers/actionTypes';
+
+export const fetchUserRequest = () => {
+  return {
+    type: ActionTypes.FETCH_USER_REQUEST,
+  }
+}
+
+export const fetchUserSuccess = (data) => {
+  return {
+    type: ActionTypes.FETCH_USERS_SUCCESS,
+    payload: data,
+  }
+}
+
+export const fetchUserError = (error) => {
+  return {
+    type: ActionTypes.FETCH_USERS_FAILURE,
+    payload: error.message,
+  }
+}
+
 
 export const fetchUsers = () => async dispatch => {
   dispatch({ type: 'FETCH_USERS_REQUEST' });
